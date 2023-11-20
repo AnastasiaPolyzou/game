@@ -1,0 +1,72 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void Menu() {
+    printf("\nChoice:\n");
+    printf("1. Stone\n");
+    printf("2. Pencil\n");
+    printf("3. Scissors\n");
+    printf("4. Paper\n");
+    printf("0. Exit\n");
+}
+
+int main() {
+    char playername[20];
+    int playerchoice;
+    int computerchoice;
+    int playerscore;
+    int computerscore;
+    int rounds;
+  
+    printf("Please type your name: ");
+    scanf("%s", playername);
+
+    rounds = 0;
+    playerscore = 0;
+    computerscore = 0;
+
+    do {
+        Menu();
+
+        printf("\nrounds %d - Score: %s %d -  %d\n", rounds + 1, playername, playerscore, computerscore);
+
+        printf("Choice %s: ", playername);
+        scanf("%d", &playerchoice);
+
+        if (playerchoice < 0 || playerchoice > 4) {
+            printf("Not right choice please try again.\n");
+            return 1;
+        }
+
+        if (playerchoice == 0) {
+            printf("Total score: %s %d - %d Computer.Thank for gameι!\n", playername, playerscore, computerscore);
+            break;
+        }
+
+        srand(time(0));
+        computerchoice = rand() % 4 + 1;
+
+        printf("The computer choice: %d\n", computerchoice);
+
+        
+        if (playerchoice == computerchoice) {
+            printf("Draw!\n");
+        } else if ((playerchoice == 1 && computerchoice == 3) ||
+                   (playerchoice == 2 && computerchoice == 1) ||
+                   (playerchoice == 3 && computerchoice == 2) ||
+                   (playerchoice == 4 && computerchoice == 1)) {
+            printf("Win!\n");
+            playerscore++;
+        } else {
+            printf("You lost!\n");
+            computerscore++;
+        }
+
+        rounds++;
+
+    } while (playerchoice != 0);
+
+    return 0;
+}
